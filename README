@@ -5,3 +5,7 @@ NanoNrf24l01Interface - Interface for nRF24L01 (depends on http://github.com/aar
 NanoEthernetInterface - Interface for the official Arduino ethernet shield (http://arduino.cc/en/Reference/Ethernet)
 NanoEnc28j60Udp - Work in progres do not use.
 NanoNetChronAction - Better timeouts (depends on http://github.com/aaronds/arduino-unix-time)
+
+Zip files for extracting in Arduino libraries folder:
+
+http://github.com/aaronds/nanonet/downloads
