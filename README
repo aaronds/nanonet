@@ -1,9 +1,14 @@
 Nanonet is lightweight network stack for Arduino aimed at small wirless radios like the nRF24L01 but supporting other interfaces including the ethernet shield.
 
+Illustrative examples:
+
+http://github.com/aaronds/nanonet/blob/master/NanoNet/examples/nano_example_ping_client/nano_example_ping_client.pde
+http://github.com/aaronds/nanonet/blob/master/NanoNet/examples/nano_example_ping_server/nano_example_ping_server.pde
+
 NanoNet - The core library (see examples folder)
 NanoNrf24l01Interface - Interface for nRF24L01 (depends on http://github.com/aaronds/arduino-nrf24l01)
 NanoEthernetInterface - Interface for the official Arduino ethernet shield (http://arduino.cc/en/Reference/Ethernet)
-NanoEnc28j60Udp - Work in progres do not use.
+NanoEnc28j60Udp - Work in progress do not use.
 NanoNetChronAction - Better timeouts (depends on http://github.com/aaronds/arduino-unix-time)
 
 Zip files for extracting in Arduino libraries folder:
