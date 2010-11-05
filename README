@@ -9,7 +9,7 @@ NanoNet - The core library (see examples folder)
 NanoNrf24l01Interface - Interface for nRF24L01 (depends on http://github.com/aaronds/arduino-nrf24l01)
 NanoEthernetInterface - Interface for the official Arduino ethernet shield (http://arduino.cc/en/Reference/Ethernet)
 NanoEnc28j60Udp - Work in progress do not use.
-NanoNetChronAction - Better timeouts (depends on http://github.com/aaronds/arduino-unix-time)
+NanoNetCronAction - Better timeouts (depends on http://github.com/aaronds/arduino-unix-time)
 
 Zip files for extracting in Arduino libraries folder:
 
