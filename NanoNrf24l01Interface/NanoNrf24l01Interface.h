@@ -17,6 +17,8 @@ class NanoNrf24l01Interface : public NanoInterface {
 		void powerUp();
 		void powerDown();
 		bool isTransmitting();
+		void zeroRegister(uint8_t reg,uint8_t len);
+		void zeroR0();
 };
 
 #endif

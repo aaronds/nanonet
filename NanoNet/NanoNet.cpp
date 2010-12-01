@@ -1,5 +1,4 @@
 #include <NanoNet.h>
-#include <HardwareSerial.h>
 /**
  * Initalize class variables.
  */

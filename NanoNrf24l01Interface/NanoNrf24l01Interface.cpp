@@ -20,35 +20,9 @@ void NanoNrf24l01Interface::init(Nrf24l *m,uint8_t *addr,uint8_t *msk){
 
 uint8_t NanoNrf24l01Interface::available(){
 
-	/*
-	 Functionality moved into poll
-	 
-	if(errorSocket != NULL){
-		if(errorSocket->handler){
-			errorSocket->handler->error(sock,NanoSocketHandler::SOCK_ERROR_NO_ACK);
-		}
-		errorSocket = NULL;
-	}
-	*/
-	
-	uint8_t status = mirf->getStatus();
+	interupt();
 
-	if(status & (1 << TX_DS)){
-		if(sock){
-			sock->state = NanoSocketHandler::SOCK_ACTION_ACK;  
-			sock = NULL;
-		}
-		mirf->powerUpRx();
-	}else if(status & (1 << MAX_RT)){
-		if(sock){
-			sock->state = NanoSocketHandler::SOCK_ERROR_NO_ACK;
-			sock = NULL;
-		}
-		sock = NULL;
-		mirf->powerUpRx();
-	}
-
-	if(status & (1 << RX_DR) || !mirf->rxFifoEmpty()){
+	if(mirf->dataReady()){
 		return mirf->payload;
 	}else{
 		return false;
@@ -94,17 +68,20 @@ void NanoNrf24l01Interface::interupt(){
 			sock->state = NanoSocketHandler::SOCK_ACTION_ACK;
 			sock = NULL;
 		}
+		zeroR0();
 		mirf->powerUpRx();
 	}else if(status & (1 << MAX_RT)){
 		if(sock){
 			sock->state = NanoSocketHandler::SOCK_ACTION_ACK;
 			sock = NULL;
 		}
+		zeroR0();
 		mirf->powerUpRx();
 	}
 }
 
 void NanoNrf24l01Interface::powerUp(){
+	zeroR0();
 	mirf->powerUpRx();
 }
 
@@ -114,4 +91,18 @@ void NanoNrf24l01Interface::powerDown(){
 
 bool NanoNrf24l01Interface::isTransmitting(){
 	return mirf->PTX > 0;
+}
+
+void NanoNrf24l01Interface::zeroRegister(uint8_t reg,uint8_t len){
+	mirf->csnLow();
+	mirf->spi->transfer(R_REGISTER | (REGISTER_MASK & reg));
+	
+	for(int i = 0;i < len;i++){
+		mirf->spi->transfer(0);
+	}
+	mirf->csnHi();
+}
+
+void NanoNrf24l01Interface::zeroR0(){
+	zeroRegister(RX_ADDR_P0,NANO_ADDR_SIZE);
 }
